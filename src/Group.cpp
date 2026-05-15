@@ -15,6 +15,8 @@ void Group::addRecord(const std::string& recordString) {
     try {
         Record rec = Record::fromString(recordString);
         records_.push_back(rec);
+        std::sort(records_.begin(), records_.end());
+        
     } catch (const std::exception& e) {
         throw std::runtime_error("无法解析记录: " + recordString);
     }
