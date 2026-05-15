@@ -13,6 +13,15 @@ file(GLOB_RECURSE SOURCE_FILES "${PROJECT_SOURCE_DIR}/src/*.cpp")
 # 生成可执行文件
 add_executable(careerlog ${SOURCE_FILES} ${HEADER_FILES})
 
+# 自动复制配置文件到可执行文件所在的目录
+# 这样无论你的 careerlog.exe 在 build 目录的哪个子文件夹里，都能找到同级的 config.txt
+add_custom_command(TARGET careerlog POST_BUILD
+    # 复制 config.txt（如果存在）
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+    ${CMAKE_SOURCE_DIR}/config.txt
+    $<TARGET_FILE_DIR:careerlog>
+)
+
 # 在 IDE 中按目录结构展示头文件
 source_group(TREE "${PROJECT_SOURCE_DIR}/include" PREFIX "Header Files" FILES ${HEADER_FILES})
 source_group(TREE "${PROJECT_SOURCE_DIR}/src" PREFIX "Source Files" FILES ${SOURCE_FILES})
