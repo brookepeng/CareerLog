@@ -7,12 +7,17 @@
 #include <iostream>
 #include <functional> // 用于 std::function (可选，这里主要用函数指针)
 #include "Database.h"
+#include "ConfigManager.h"
+#include "DataFileManager.h"
 
 class CommandProcessor {
 private:
     Database database_;
     Group* currentGroup_; // 当前上下文：nullptr 表示在 Database 层级
     bool flag_quit_ = false; //退出标志
+    ConfigManager config_;
+    DataFileManager datafile_;
+
 
     // --- 1. 定义成员函数指针类型 ---
     // 返回值 void，参数为 const std::vector<std::string>& (命令行参数)

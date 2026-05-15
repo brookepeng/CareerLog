@@ -3,8 +3,10 @@
 #include <sstream>
 #include <stdexcept>
 
-CommandProcessor::CommandProcessor() : currentGroup_(nullptr) {
+CommandProcessor::CommandProcessor() : database_(),currentGroup_(nullptr) ,datafile_(config_.getDataFilePath())
+{
     initCommands();
+    
 }
 
 // 简单的字符串分割
@@ -42,6 +44,9 @@ void CommandProcessor::initCommands() {
 
 void CommandProcessor::run() {
     std::cout << "=== 系统启动 ===" << std::endl;
+
+    cmdImportMarkdown({"", datafile_.getFilePath()});
+
     std::string input;
 
     while (!flag_quit_) {
@@ -85,6 +90,8 @@ void CommandProcessor::run() {
             std::cerr << "未知命令: " << cmdKey << std::endl;
         }
     }
+
+    cmdSaveToFile({"",datafile_.getFilePath()});
     std::cout<<"程序已正常退出"<<std::endl;
 }
 
