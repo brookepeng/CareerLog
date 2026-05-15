@@ -28,6 +28,7 @@ void CommandProcessor::initCommands() {
     db_commands_["help"] = &CommandProcessor::cmdHelp;
     db_commands_["save_to_file"] = &CommandProcessor::cmdSaveToFile;
     db_commands_["import_md"] = &CommandProcessor::cmdImportMarkdown;
+    db_commands_["quit"] = &CommandProcessor::cmdQuit;
 
     // --- 注册 Group 层级指令 ---
     group_commands_["add_record"] = &CommandProcessor::cmdAddRecord;
@@ -36,13 +37,14 @@ void CommandProcessor::initCommands() {
     group_commands_["print"] = &CommandProcessor::cmdPrint;
     group_commands_["help"] = &CommandProcessor::cmdHelp;
     group_commands_["save_to_file"] = &CommandProcessor::cmdSaveToFile;
+    group_commands_["quit"] = &CommandProcessor::cmdQuit;
 }
 
 void CommandProcessor::run() {
     std::cout << "=== 系统启动 ===" << std::endl;
     std::string input;
 
-    while (true) {
+    while (!flag_quit_) {
         // 1. 显示提示符
         if (currentGroup_ == nullptr) {
             std::cout << "[DB]> ";
@@ -83,6 +85,7 @@ void CommandProcessor::run() {
             std::cerr << "未知命令: " << cmdKey << std::endl;
         }
     }
+    std::cout<<"程序已正常退出"<<std::endl;
 }
 
 // ==========================================
@@ -185,4 +188,9 @@ void CommandProcessor::cmdImportMarkdown(const std::vector<std::string> &args)
         throw std::runtime_error("用法: import_md <文件名>");
     }
     database_.importFromFile(args[1]);
+}
+
+void CommandProcessor::cmdQuit(const std::vector<std::string> &args)
+{
+    flag_quit_ = true;
 }

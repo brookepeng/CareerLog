@@ -12,6 +12,7 @@ class CommandProcessor {
 private:
     Database database_;
     Group* currentGroup_; // 当前上下文：nullptr 表示在 Database 层级
+    bool flag_quit_ = false; //退出标志
 
     // --- 1. 定义成员函数指针类型 ---
     // 返回值 void，参数为 const std::vector<std::string>& (命令行参数)
@@ -50,6 +51,7 @@ public:
     // 通用方法 (两个层级都可能用到)
     void cmdPrint(const std::vector<std::string>& args);
     void cmdHelp(const std::vector<std::string>& args);
+    void cmdQuit(const std::vector<std::string>& args);
 };
 
 #endif
