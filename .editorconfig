@@ -1,0 +1,9 @@
+root = true
+
+[*]
+charset = utf-8          # 强制字符集为 UTF-8
+end_of_line = lf         # 换行符统一为 LF (Linux/Unix 风格，Git 友好)
+insert_final_newline = true
+trim_trailing_whitespace = true
+indent_style = space
+indent_size = 4

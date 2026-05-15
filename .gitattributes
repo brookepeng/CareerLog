@@ -1,0 +1,8 @@
+# 强制 Git 将文本文件视为 UTF-8
+* text=auto eol=lf
+
+# 针对特定文件类型的设置
+*.c text eol=lf encoding=utf-8
+*.cpp text eol=lf encoding=utf-8
+*.h text eol=lf encoding=utf-8
+*.txt text eol=lf encoding=utf-8

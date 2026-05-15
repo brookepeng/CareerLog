@@ -1,0 +1,51 @@
+{
+    "version": 3,
+    "configurePresets": [
+        {
+            "name": "vs2022-x64",
+            "displayName": "Visual Studio 2022 (x64)",
+            "description": "生成 VS 2022 的 .sln 文件，架构为 x64",
+            "generator": "Visual Studio 17 2022",
+            "architecture": "x64",
+            "binaryDir": "${sourceDir}/build/vs",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release"
+            }
+        },
+        {
+            "name": "mingw-debug",
+            "displayName": "MinGW Debug",
+            "description": "使用 MinGW 编译器进行 Debug 调试构建",
+            "generator": "MinGW Makefiles",
+            "binaryDir": "${sourceDir}/build",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug",
+                "CMAKE_CXX_COMPILER": "g++",
+                "CMAKE_C_COMPILER": "gcc"
+            }
+        },
+        {
+            "name": "ninja-multi",
+            "displayName": "Ninja Multi-Config (MinGW)",
+            "description": "使用 Ninja 生成器，支持同时构建 Debug 和 Release，适合命令行开发",
+            "generator": "Ninja Multi-Config",
+            "binaryDir": "${sourceDir}/build/ninja",
+            "cacheVariables": {
+                "CMAKE_CXX_STANDARD": "20",
+                "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
+            }
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "debug",
+            "configurePreset": "ninja-multi",
+            "configuration": "Debug"
+        },
+        {
+            "name": "release",
+            "configurePreset": "ninja-multi",
+            "configuration": "Release"
+        }
+    ]
+}
