@@ -26,6 +26,8 @@ void CommandProcessor::initCommands() {
     db_commands_["enter"] = &CommandProcessor::cmdEnterGroup;
     db_commands_["print"] = &CommandProcessor::cmdPrint;
     db_commands_["help"] = &CommandProcessor::cmdHelp;
+    db_commands_["save_to_file"] = &CommandProcessor::cmdSaveToFile;
+    db_commands_["import_md"] = &CommandProcessor::cmdImportMarkdown;
 
     // --- 注册 Group 层级指令 ---
     group_commands_["add_record"] = &CommandProcessor::cmdAddRecord;
@@ -33,6 +35,7 @@ void CommandProcessor::initCommands() {
     group_commands_["exit"] = &CommandProcessor::cmdExitGroup;
     group_commands_["print"] = &CommandProcessor::cmdPrint;
     group_commands_["help"] = &CommandProcessor::cmdHelp;
+    group_commands_["save_to_file"] = &CommandProcessor::cmdSaveToFile;
 }
 
 void CommandProcessor::run() {
@@ -161,4 +164,25 @@ void CommandProcessor::cmdHelp(const std::vector<std::string>& args) {
     else {
         for (const auto& p : group_commands_) std::cout << "  " << p.first << "\n";
     }
+}
+
+void CommandProcessor::cmdSaveToFile(const std::vector<std::string> &args)
+{
+    if (args.size() < 2)
+    {
+        throw std::runtime_error("用法: save_to_file <文件名>");
+    }
+
+    std::string filename = args[1];
+    // 可以简单检查是否以 .txt 或 .log 结尾，或者直接交给 Database 处理
+    database_.exportToFile(filename);
+}
+
+void CommandProcessor::cmdImportMarkdown(const std::vector<std::string> &args)
+{
+    if (args.size() < 2)
+    {
+        throw std::runtime_error("用法: import_md <文件名>");
+    }
+    database_.importFromFile(args[1]);
 }

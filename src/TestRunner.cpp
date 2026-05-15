@@ -59,7 +59,7 @@ void test_Record() {
         std::string input = "2023-05-09 08:30:00 系统启动";
         Record rec = Record::fromString(input);
         ASSERT_EQUAL(rec.toString(), input, "Standard Record Parse");
-        ASSERT_EQUAL(rec.getInformation(), "系统启动", "Record Info Extraction");
+        ASSERT_EQUAL(rec.getInfo(), "系统启动", "Record Info Extraction");
     }
     catch (TestFailureException&) {}
 
@@ -98,7 +98,7 @@ void test_Group() {
 
         const auto& records = logGroup.getRecords();
         ASSERT_EQUAL(records.size(), (size_t)2, "Add Records Count");
-        ASSERT_EQUAL(records[0].getInformation(), "程序启动", "First Record Content");
+        ASSERT_EQUAL(records[0].getInfo(), "程序启动", "First Record Content");
     }
     catch (TestFailureException&) {}
 
@@ -120,7 +120,7 @@ void test_Group() {
         g2.removeRecord(1); // 删除 B
         std::cout << g2;
         ASSERT_EQUAL(g2.getRecords().size(), (size_t)2, "Remove Record Count");
-        ASSERT_EQUAL(g2.getRecords()[1].getInformation(), "C", "Remaining Record After Remove");
+        ASSERT_EQUAL(g2.getRecords()[1].getInfo(), "C", "Remaining Record After Remove");
     }
     catch (TestFailureException&) {}
 

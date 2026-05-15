@@ -31,6 +31,9 @@ public:
 
     // 6. 重载输出流运算符 <<
     friend std::ostream& operator<<(std::ostream& os, const Database& db);
+
+    void importFromFile(const std::string& filename);
+    void exportToFile(const std::string& filename) const;
 };
 
 #endif // DATABASE_H

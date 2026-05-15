@@ -46,8 +46,17 @@ std::string Record::toString() const {
     return oss.str();
 }
 
-const std::string& Record::getInformation() const {
+const std::string& Record::getInfo() const {
     return info;
+}
+
+const TimePoint& Record::getTime() const {
+    return time;
+}
+
+const Date &Record::getDate() const
+{
+    return date;
 }
 
 std::ostream& operator<<(std::ostream& os, const Record& rec) {

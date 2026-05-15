@@ -22,7 +22,9 @@ public:
     std::string toString() const;
 
     // Getter
-    const std::string& getInformation() const;
+    const std::string& getInfo() const;
+    const TimePoint& getTime() const;
+    const Date& getDate() const;
 
     friend std::ostream& operator<<(std::ostream& os, const Record& rec);
 

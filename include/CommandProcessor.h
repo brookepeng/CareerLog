@@ -39,6 +39,8 @@ public:
     void cmdAddGroup(const std::vector<std::string>& args);
     void cmdRemoveGroup(const std::vector<std::string>& args);
     void cmdEnterGroup(const std::vector<std::string>& args);
+    void cmdSaveToFile(const std::vector<std::string>& args);
+    void cmdImportMarkdown(const std::vector<std::string>& args);
 
     // Group 层级方法
     void cmdAddRecord(const std::vector<std::string>& args);

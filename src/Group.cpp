@@ -10,9 +10,14 @@ Group::Group(const std::string& name) : name_(name) {
 
 // 2. 插入单个 Record 的方法实现
 void Group::addRecord(const std::string& recordString) {
-    // 使用 Record 的静态工厂函数解析字符串，并将其添加到向量末尾
-    records_.push_back(Record::fromString(recordString));
-    std::sort(records_.begin(), records_.end());
+    // 直接利用 Record 的静态工厂方法 fromString 来解析字符串
+    // 假设 recordString 格式为 "HH:MM:SS 信息内容"
+    try {
+        Record rec = Record::fromString(recordString);
+        records_.push_back(rec);
+    } catch (const std::exception& e) {
+        throw std::runtime_error("无法解析记录: " + recordString);
+    }
 }
 
 // 3. 删除单个 Record 的方法实现
